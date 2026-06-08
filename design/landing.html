@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DubaiYachtz — Landing (Visual Design Comp)</title>
+<meta name="description" content="Static visual design composition for the DubaiYachtz landing page.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="comps.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="phase-tag">VISUAL DESIGN COMP · <b>Landing</b> · static (no motion engine)</div>
+
+<!-- NAV (frosted state shown) -->
+<header class="nav">
+  <div class="container nav__inner">
+    <a href="#" class="nav__logo">DubaiYachtz</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a class="nav__link" href="#fleet">Fleet</a>
+      <a class="nav__link" href="#categories">Categories</a>
+      <a class="nav__link" href="detail.html">Brokerage</a>
+      <a class="nav__link" href="#story">Heritage</a>
+    </nav>
+    <a class="nav__cta" href="#concierge">Enquire <span class="btn__arrow">→</span></a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- S1 · HERO (static stand-in for WebGL ocean+sky) -->
+  <section class="hero">
+    <span class="hero__note">◆ build phase → live WebGL ocean+sky shader</span>
+    <div class="container hero__content">
+      <p class="eyebrow eyebrow--invert hero__eyebrow"><span class="dot"></span>Curated luxury yachts · Est. 1998</p>
+      <h1 class="hero__title">The art of being at sea</h1>
+      <div class="hero__row">
+        <p class="hero__sub">A private collection of the world's finest motor and sailing yachts, represented with absolute discretion.</p>
+        <div class="hero__actions">
+          <a href="#fleet" class="btn btn--invert">Explore the fleet</a>
+          <a href="#concierge" class="btn btn--ghost" style="color:#fff;border-color:rgba(255,255,255,.4)">Speak with a specialist</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero__scroll"><span>Scroll</span><span class="bar"></span></div>
+  </section>
+
+  <!-- S2 · MANIFESTO -->
+  <section class="manifesto section-pad">
+    <div class="container split">
+      <p class="manifesto__text">A yacht is not purchased. It is chosen — the way one chooses a horizon worth chasing.</p>
+      <div class="manifesto__aside">
+        <p class="eyebrow"><span class="dot"></span>Our philosophy</p>
+        <p>For more than twenty-five years we have matched discerning owners with extraordinary vessels — guided by craft, privacy, and an uncompromising eye.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- S3 · FLEET (grid in comp; horizontal-pin is build phase) -->
+  <section class="fleet section-pad" id="fleet">
+    <div class="container">
+      <div class="fleet__head">
+        <div>
+          <p class="eyebrow"><span class="dot"></span>Featured fleet</p>
+          <h2 class="serif" style="margin-top:16px">Vessels of rare distinction</h2>
+        </div>
+        <a href="detail.html" class="btn btn--ghost">View all yachts</a>
+      </div>
+      <div class="fleet__grid">
+
+        <article class="yacht-card">
+          <div class="yacht-card__media"><span class="yacht-card__badge">New listing</span>
+            <img src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=900&q=80" alt="Azimut Grande 36M"></div>
+          <div class="yacht-card__body">
+            <h3 class="yacht-card__name">Azimut Grande 36M</h3>
+            <div class="yacht-card__specs"><span>LOA<b>36.0 m</b></span><span>Year<b>2024</b></span><span>Guests<b>10</b></span></div>
+            <div class="yacht-card__foot"><span class="yacht-card__price">€11,900,000</span><a href="detail.html" class="yacht-card__link">Details <span class="btn__arrow">→</span></a></div>
+          </div>
+        </article>
+
+        <article class="yacht-card">
+          <div class="yacht-card__media"><img src="https://images.unsplash.com/photo-1540946485063-a40da27545f8?auto=format&fit=crop&w=900&q=80" alt="Sunseeker 88"></div>
+          <div class="yacht-card__body">
+            <h3 class="yacht-card__name">Sunseeker 88 Yacht</h3>
+            <div class="yacht-card__specs"><span>LOA<b>26.8 m</b></span><span>Year<b>2023</b></span><span>Guests<b>8</b></span></div>
+            <div class="yacht-card__foot"><span class="yacht-card__price">€6,400,000</span><a href="detail.html" class="yacht-card__link">Details <span class="btn__arrow">→</span></a></div>
+          </div>
+        </article>
+
+        <article class="yacht-card">
+          <div class="yacht-card__media"><span class="yacht-card__badge">Brokerage</span>
+            <img src="https://images.unsplash.com/photo-1605281317010-fe5ffe798166?auto=format&fit=crop&w=900&q=80" alt="Riva 102 Corsaro"></div>
+          <div class="yacht-card__body">
+            <h3 class="yacht-card__name">Riva 102 Corsaro</h3>
+            <div class="yacht-card__specs"><span>LOA<b>30.0 m</b></span><span>Year<b>2022</b></span><span>Guests<b>9</b></span></div>
+            <div class="yacht-card__foot"><span class="yacht-card__price">Price on application</span><a href="detail.html" class="yacht-card__link">Details <span class="btn__arrow">→</span></a></div>
+          </div>
+        </article>
+
+      </div>
+      <div class="note-strip">Build phase: this row pins and scrolls horizontally (vessels glide past) — composition &amp; card design shown here.</div>
+    </div>
+  </section>
+
+  <!-- S4 · HERITAGE -->
+  <section class="story section-pad" id="story">
+    <div class="container split">
+      <div class="story__media"><img src="https://images.unsplash.com/photo-1593351415075-3bac9f45c877?auto=format&fit=crop&w=1000&q=80" alt="A yacht on calm open water at golden hour"></div>
+      <div>
+        <p class="eyebrow eyebrow--invert"><span class="dot"></span>Heritage &amp; craft</p>
+        <h2 class="serif">Built by masters. Chosen by few.</h2>
+        <p>Every vessel in our collection is the work of the world's most revered shipyards — where naval engineering meets the patience of true craft. We represent only what we would sail ourselves.</p>
+        <a href="detail.html" class="btn btn--brass">Discover the craft <span class="btn__arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- S5 · STATS -->
+  <section class="stats section-pad">
+    <div class="container">
+      <p class="eyebrow eyebrow--invert" style="margin-bottom:48px"><span class="dot"></span>A quarter century at sea</p>
+      <div class="stats__grid">
+        <div class="stat"><div class="stat__num">640+</div><div class="stat__label">Yachts brokered</div></div>
+        <div class="stat"><div class="stat__num">€4.2B</div><div class="stat__label">In transactions</div></div>
+        <div class="stat"><div class="stat__num">27</div><div class="stat__label">Years of service</div></div>
+        <div class="stat"><div class="stat__num">32</div><div class="stat__label">Countries served</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S6 · CATEGORIES -->
+  <section class="section-pad" id="categories" style="background:var(--mist-50)">
+    <div class="container">
+      <div class="fleet__head" style="margin-bottom:48px">
+        <div><p class="eyebrow"><span class="dot"></span>Browse by type</p><h2 class="serif" style="margin-top:16px">Find your vessel</h2></div>
+      </div>
+      <div class="cats__grid">
+        <a href="detail.html" class="cat"><img src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=600&q=80" alt=""><div><span class="cat__name serif">Motor</span><span class="cat__count" style="display:block">128 yachts</span></div></a>
+        <a href="detail.html" class="cat"><img src="https://images.unsplash.com/photo-1540946485063-a40da27545f8?auto=format&fit=crop&w=600&q=80" alt=""><div><span class="cat__name serif">Sailing</span><span class="cat__count" style="display:block">74 yachts</span></div></a>
+        <a href="detail.html" class="cat"><img src="https://images.unsplash.com/photo-1605281317010-fe5ffe798166?auto=format&fit=crop&w=600&q=80" alt=""><div><span class="cat__name serif">Explorer</span><span class="cat__count" style="display:block">41 yachts</span></div></a>
+        <a href="detail.html" class="cat"><img src="https://images.unsplash.com/photo-1593351415075-3bac9f45c877?auto=format&fit=crop&w=600&q=80" alt=""><div><span class="cat__name serif">Catamaran</span><span class="cat__count" style="display:block">36 yachts</span></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- S7 · TESTIMONIAL -->
+  <section class="quote section-pad">
+    <div class="container container--std">
+      <blockquote class="serif">"They did not sell me a yacht. They understood the life I wanted to live on the water — and found the vessel for it."</blockquote>
+      <p class="cite"><b>Alexander R.</b> — Owner, M/Y Aurelia</p>
+    </div>
+  </section>
+
+  <!-- S8 · CONCIERGE -->
+  <section class="concierge section-pad" id="concierge">
+    <div class="concierge__bg"><img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?auto=format&fit=crop&w=1600&q=80" alt=""></div>
+    <div class="container">
+      <p class="eyebrow eyebrow--invert" style="margin-bottom:20px"><span class="dot"></span>Private concierge</p>
+      <h2>Begin a quiet conversation</h2>
+      <p>A dedicated specialist will personally guide you through the collection — at your pace, in complete confidence.</p>
+      <div class="ctas">
+        <a href="detail.html" class="btn btn--invert">Request a private viewing <span class="btn__arrow">→</span></a>
+        <a href="#" class="soft">or save your shortlist</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- S9 · FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand"><h3 class="serif">DubaiYachtz</h3><p>Curated luxury yachts, represented with discretion since 1998.</p></div>
+      <div class="footer__col"><h4>Explore</h4><a href="#fleet">Fleet</a><a href="#categories">Categories</a><a href="detail.html">Brokerage</a><a href="#story">Heritage</a></div>
+      <div class="footer__col"><h4>Company</h4><a href="#">About</a><a href="#">Specialists</a><a href="#">Press</a><a href="#">Careers</a></div>
+      <div class="footer__col"><h4>Contact</h4><a href="#">Dubai Marina</a><a href="#">Abu Dhabi</a><a href="#">+971 4 000 0000</a><a href="#">enquiries@dubaiyachtz.com</a></div>
+    </div>
+    <div class="footer__bottom"><span>© 1998–2026 DubaiYachtz. All rights reserved.</span><span>Privacy · Terms · Cookies</span></div>
+  </div>
+</footer>
+
+</body>
+</html>
