@@ -5,20 +5,24 @@
 > deferred to the build phase. Everything here is driven by `DESIGN_SYSTEM.md` tokens.
 
 ## Files
+
 - `design/landing.html` — Landing page composition (storyboard scenes S1–S9)
 - `design/detail.html` — Yacht detail composition (storyboard scenes D1–D8)
 - `design/comps.css` — token-driven stylesheet (self-contained, no JS dependency)
 
 ## What is intentionally NOT in these comps (deferred to build)
-| Storyboard element | Comp treatment | Build phase |
-|---|---|---|
-| S1 WebGL ocean+sky hero | Static CSS Monsoon-Glow gradient (sky→horizon→deep water) + annotation chip | Three.js GLSL shader + scroll descent |
-| S3 Fleet horizontal pin | Real 3-up card grid + note strip | ScrollTrigger pin + horizontal scrub |
-| Scroll reveals / counters | Everything shown in final state | GSAP/ScrollTrigger entrance + count |
-| D0 / D8 boarding transition | Standard links between pages | Barba.js shared-element morph |
-| D3 gallery dissolves | Static grid + tabs | WebGL displacement dissolve + lightbox |
-| D5 3D model | Poster image + "Drag to orbit" hint pill | Three.js Draco glTF, lazy-loaded |
-| Custom cursor / preloader | Omitted (design layer) | Build-phase JS |
+
+
+| Storyboard element          | Comp treatment                                                              | Build phase                            |
+| --------------------------- | --------------------------------------------------------------------------- | -------------------------------------- |
+| S1 WebGL ocean+sky hero     | Static CSS Monsoon-Glow gradient (sky→horizon→deep water) + annotation chip | Three.js GLSL shader + scroll descent  |
+| S3 Fleet horizontal pin     | Real 3-up card grid + note strip                                            | ScrollTrigger pin + horizontal scrub   |
+| Scroll reveals / counters   | Everything shown in final state                                             | GSAP/ScrollTrigger entrance + count    |
+| D0 / D8 boarding transition | Standard links between pages                                                | Barba.js shared-element morph          |
+| D3 gallery dissolves        | Static grid + tabs                                                          | WebGL displacement dissolve + lightbox |
+| D5 3D model                 | Poster image + "Drag to orbit" hint pill                                    | Three.js Draco glTF, lazy-loaded       |
+| Custom cursor / preloader   | Omitted (design layer)                                                      | Build-phase JS                         |
+
 
 > A `phase-tag` chip is fixed bottom-left on each comp to make clear these are design screens.
 
@@ -71,6 +75,7 @@
 ---
 
 ## Why these compositions deliver the brand
+
 - **Restraint = luxury:** one display headline, one primary action, and vast `--space-9/11` whitespace per scene.
 - **Three type voices working:** Fraunces (emotion), Inter Tight (clarity), IBM Plex Mono (precision specs) — exactly per the system.
 - **Brass is rationed:** eyebrow dots, one heritage CTA, stat dividers, active tab underline — never a large fill (≤5% rule).
@@ -78,4 +83,5 @@
 - **Conversion is concierge, not commerce:** POA pricing, "Request a private viewing," layered CTAs — the deliberate inversion of the charter-template benchmark.
 
 ---
+
 *Visual design phase complete. Next (on approval): the full build — wiring these compositions to the Experience Blueprint's motion system (Lenis + GSAP + Three.js + transitions).*
