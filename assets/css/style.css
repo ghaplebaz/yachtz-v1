@@ -159,7 +159,7 @@ section{position:relative}
 .nav__cta{display:inline-flex;align-items:center;gap:8px;border:1px solid currentColor;white-space:nowrap;
   padding:10px 22px;border-radius:var(--radius-pill);font-size:var(--fs-small);
   transition:background var(--dur-fast),color var(--dur-fast),border-color var(--dur-fast)}
-.nav.is-scrolled .nav__cta:hover{background:var(--ocean-500);color:#fff;border-color:var(--ocean-500)}
+.nav.is-scrolled .nav__cta:hover{background:var(--sec-deep);color:#fff;border-color:var(--sec-deep)}
 .nav__cta:hover{background:#fff;color:var(--ocean-800);border-color:#fff}
 @media(max-width:640px){
   .nav__logo{font-size:1.3rem}
@@ -239,9 +239,12 @@ section{position:relative}
 .fleet{background:var(--sec-mint);overflow:hidden}
 .fleet__head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:var(--space-5);margin-bottom:var(--space-8)}
 .fleet__head h2{font-size:var(--fs-h2);max-width:14ch}
-.fleet__track-wrap{overflow:hidden}
-.fleet__track{display:flex;gap:var(--space-6);padding-inline:var(--gutter);will-change:transform}
-.yacht-card{flex:0 0 clamp(300px,40vw,520px);background:var(--white);border-radius:var(--radius-lg);
+.fleet__track-wrap{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;scroll-snap-type:x proximity;cursor:grab}
+.fleet__track-wrap::-webkit-scrollbar{display:none}
+.fleet__track-wrap:active{cursor:grabbing}
+.fleet__track{display:flex;gap:var(--space-6);padding-inline:var(--gutter);padding-block:var(--space-3)}
+.yacht-card{flex:0 0 clamp(300px,40vw,520px);scroll-snap-align:start;background:var(--white);border-radius:var(--radius-lg);
   overflow:hidden;box-shadow:var(--elev-1);transition:box-shadow var(--dur-base) var(--ease-luxury)}
 .yacht-card:hover{box-shadow:var(--elev-3)}
 .yacht-card__media{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--sky-100)}
@@ -261,8 +264,7 @@ section{position:relative}
 .yacht-card__foot{display:flex;justify-content:space-between;align-items:center;margin-top:var(--space-5)}
 .yacht-card__price{font-family:var(--font-mono);font-size:var(--fs-small);color:var(--text-strong)}
 .yacht-card__link{font-size:var(--fs-small);color:var(--ocean-500);display:inline-flex;gap:6px;align-items:center}
-.fleet__progress{height:1px;background:var(--border-default);margin:var(--space-8) var(--gutter) 0;position:relative}
-.fleet__progress i{position:absolute;left:0;top:0;height:100%;width:20%;background:var(--brass)}
+.fleet__progress{display:none}
 /* Mobile: fleet becomes a native swipe carousel (no desktop pin) */
 @media(max-width:768px){
   .fleet__track-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:none}
@@ -504,11 +506,32 @@ section{position:relative}
 .newsletter input::placeholder{color:rgba(255,255,255,.5)}
 .newsletter input:focus{outline:none;border-color:var(--sky-300);box-shadow:var(--focus-ring-invert)}
 
-/* ---------- REDUCED MOTION ---------- */
+/* ============================================================
+   FEATURE CARD MOTION SYSTEM  (unified · editorial · premium)
+   ============================================================ */
+/* Smooth base transition for every feature card */
+.feature-card,.service-card,.yacht-card,.cat,.review,.photoband figure,.gallery__item{
+  transition:transform var(--dur-slow) var(--ease-luxury),box-shadow var(--dur-slow) var(--ease-luxury)}
+/* Cards that also reveal: keep box-shadow within the transition (beats .reveal.in) */
+.feature-card.reveal.in,.service-card.reveal.in,.yacht-card.reveal.in,.cat.reveal.in,.review.reveal.in,.photoband figure.reveal.in{
+  transition:opacity var(--dur-slow) var(--ease-luxury),transform var(--dur-slow) var(--ease-luxury),box-shadow var(--dur-slow) var(--ease-luxury)}
+/* Hover elevation: gentle lift + very subtle scale + soft shadow */
+.feature-card:hover,.service-card:hover,.yacht-card:hover,.cat:hover,.review:hover,.photoband figure:hover,.gallery__item:hover{
+  transform:translateY(-6px) scale(1.012);box-shadow:var(--elev-4)}
+/* Gentle image zoom within cards */
+.feature-card:hover img,.service-card:hover .media img,.yacht-card:hover .yacht-card__media img,
+.cat:hover img,.photoband figure:hover img,.gallery__item:hover img{transform:scale(1.06)}
+/* Spotlight: emphasise the hovered card, soften its siblings */
+.features:hover>.reveal:not(:hover),.services:hover>.reveal:not(:hover),
+.reviews:hover>.reveal:not(:hover),.cats__grid:hover>.reveal:not(:hover),
+.photoband:hover>.reveal:not(:hover){opacity:.72}
 
 /* ---------- REDUCED MOTION ---------- */
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none}
   .hero__scroll .bar::after{display:none}
+  .feature-card:hover,.service-card:hover,.yacht-card:hover,.cat:hover,.review:hover,.photoband figure:hover,.gallery__item:hover{transform:none}
+  .feature-card:hover img,.service-card:hover .media img,.yacht-card:hover .yacht-card__media img,.cat:hover img,.photoband figure:hover img,.gallery__item:hover img{transform:none}
+  .features:hover>.reveal:not(:hover),.services:hover>.reveal:not(:hover),.reviews:hover>.reveal:not(:hover),.cats__grid:hover>.reveal:not(:hover),.photoband:hover>.reveal:not(:hover){opacity:1}
 }

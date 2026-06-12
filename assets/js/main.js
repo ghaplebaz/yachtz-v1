@@ -180,10 +180,17 @@
         .to('.hero__content', { autoAlpha: 0, y: -40, ease: 'none', duration: 0.4 }, 0.62);
     }
 
-    /* generic reveals */
+    /* generic reveals (skip cards inside staggered grids) */
     gsap.utils.toArray('.reveal').forEach((el) => {
+      if (el.closest('[data-stagger]')) return;
       ScrollTrigger.create({ trigger: el, start: 'top 85%',
         onEnter: () => el.classList.add('in') });
+    });
+    /* staggered feature-card grids: cards reveal progressively */
+    gsap.utils.toArray('[data-stagger]').forEach((grid) => {
+      const cards = grid.querySelectorAll(':scope > .reveal');
+      ScrollTrigger.create({ trigger: grid, start: 'top 82%', once: true,
+        onEnter: () => cards.forEach((c, i) => setTimeout(() => c.classList.add('in'), i * 90)) });
     });
 
     /* manifesto word-by-word */
@@ -199,19 +206,7 @@
       });
     }
 
-    /* horizontal fleet pin */
-    const track = document.querySelector('.fleet__track');
-    const fleet = document.querySelector('.fleet');
-    if (track && fleet && innerWidth > 768) {
-      const getScroll = () => track.scrollWidth - innerWidth + parseFloat(getComputedStyle(track).paddingLeft);
-      const tween = gsap.to(track, {
-        x: () => -getScroll(), ease: 'none',
-        scrollTrigger: { trigger: fleet, start: 'top top', end: () => '+=' + getScroll(),
-          pin: true, scrub: 1, invalidateOnRefresh: true,
-          onUpdate: (self) => { const p = document.querySelector('.fleet__progress i');
-            if (p) p.style.width = (20 + self.progress * 80) + '%'; } }
-      });
-    }
+    /* fleet is now a native drag/swipe carousel — no scroll-hijacking pin (see initFleetDrag) */
 
     /* parallax images */
     gsap.utils.toArray('[data-parallax]').forEach((img) => {
@@ -280,6 +275,28 @@
     });
   }
 
+  /* ---------- FLEET DRAG-TO-SCROLL (desktop) ---------- */
+  function initFleetDrag() {
+    const wrap = document.querySelector('.fleet__track-wrap');
+    if (!wrap || window.matchMedia('(pointer: coarse)').matches) return; // touch scrolls natively
+    let down = false, moved = false, startX = 0, startLeft = 0;
+    wrap.addEventListener('pointerdown', (e) => {
+      down = true; moved = false; startX = e.clientX; startLeft = wrap.scrollLeft;
+      try { wrap.setPointerCapture(e.pointerId); } catch (err) {}
+    });
+    wrap.addEventListener('pointermove', (e) => {
+      if (!down) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 4) moved = true;
+      wrap.scrollLeft = startLeft - dx;
+    });
+    const end = (e) => { down = false; try { wrap.releasePointerCapture(e.pointerId); } catch (err) {} };
+    wrap.addEventListener('pointerup', end);
+    wrap.addEventListener('pointercancel', end);
+    // suppress click navigation if the pointer was dragged
+    wrap.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+  }
+
   /* ---------- PAGE TRANSITION ("boarding") ---------- */
   function initPageTransition() {
     if (reduce) return;
@@ -325,6 +342,7 @@
     initGallery();
     initForm();
     initPageTransition();
+    initFleetDrag();
   });
 
   window.addEventListener('load', () => { if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh(); });
