@@ -145,17 +145,24 @@ section{position:relative}
   border-bottom:1px solid var(--border-subtle)}
 .nav__inner{display:flex;align-items:center;justify-content:space-between}
 .nav__logo{font-family:var(--font-display);font-size:1.9rem;letter-spacing:.05em}
+.nav__right{display:flex;align-items:center;gap:var(--space-6)}
 .nav__links{display:none;gap:var(--space-6);align-items:center}
 @media(min-width:1024px){.nav__links{display:flex}}
 .nav__link{position:relative;font-size:var(--fs-small);letter-spacing:.04em;padding:6px 0}
 .nav__link::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
   background:var(--brass);transition:width var(--dur-base) var(--ease-luxury)}
 .nav__link:hover::after{width:100%}
-.nav__cta{display:inline-flex;align-items:center;gap:8px;border:1px solid currentColor;
+.nav__cta{display:inline-flex;align-items:center;gap:8px;border:1px solid currentColor;white-space:nowrap;
   padding:10px 22px;border-radius:var(--radius-pill);font-size:var(--fs-small);
   transition:background var(--dur-fast),color var(--dur-fast),border-color var(--dur-fast)}
 .nav.is-scrolled .nav__cta:hover{background:var(--ocean-500);color:#fff;border-color:var(--ocean-500)}
 .nav__cta:hover{background:#fff;color:var(--ocean-800);border-color:#fff}
+@media(max-width:640px){
+  .nav__logo{font-size:1.3rem}
+  .nav__right{gap:var(--space-4)}
+  .nav__cta{padding:8px 14px;font-size:var(--fs-caption);letter-spacing:.04em}
+  .nav__cta .btn__arrow{display:none}
+}
 .nav__burger{display:flex;flex-direction:column;gap:5px;width:28px}
 @media(min-width:1024px){.nav__burger{display:none}}
 .nav__burger span{height:1.5px;background:currentColor;display:block}
@@ -252,6 +259,14 @@ section{position:relative}
 .yacht-card__link{font-size:var(--fs-small);color:var(--ocean-500);display:inline-flex;gap:6px;align-items:center}
 .fleet__progress{height:1px;background:var(--border-default);margin:var(--space-8) var(--gutter) 0;position:relative}
 .fleet__progress i{position:absolute;left:0;top:0;height:100%;width:20%;background:var(--brass)}
+/* Mobile: fleet becomes a native swipe carousel (no desktop pin) */
+@media(max-width:768px){
+  .fleet__track-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:none}
+  .fleet__track-wrap::-webkit-scrollbar{display:none}
+  .fleet__track{transform:none!important;padding-bottom:var(--space-2)}
+  .yacht-card{flex-basis:min(80vw,360px);scroll-snap-align:start}
+  .fleet__progress{display:none}
+}
 
 /* ---------- 12. STORY (dark immersive) ---------- */
 .story{background:var(--ocean-900);color:#fff;overflow:hidden}
