@@ -275,26 +275,18 @@
     });
   }
 
-  /* ---------- FLEET DRAG-TO-SCROLL (desktop) ---------- */
-  function initFleetDrag() {
-    const wrap = document.querySelector('.fleet__track-wrap');
-    if (!wrap || window.matchMedia('(pointer: coarse)').matches) return; // touch scrolls natively
-    let down = false, moved = false, startX = 0, startLeft = 0;
-    wrap.addEventListener('pointerdown', (e) => {
-      down = true; moved = false; startX = e.clientX; startLeft = wrap.scrollLeft;
-      try { wrap.setPointerCapture(e.pointerId); } catch (err) {}
+  /* ---------- FLEET MARQUEE (continuous loop) ---------- */
+  function initFleetMarquee() {
+    const track = document.querySelector('.fleet__track');
+    if (!track || reduce) return; // reduced-motion = static scrollable row
+    // duplicate the cards so translateX(-50%) loops seamlessly
+    const cards = Array.prototype.slice.call(track.children);
+    cards.forEach((c) => {
+      const clone = c.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.removeAttribute('data-cursor');
+      track.appendChild(clone);
     });
-    wrap.addEventListener('pointermove', (e) => {
-      if (!down) return;
-      const dx = e.clientX - startX;
-      if (Math.abs(dx) > 4) moved = true;
-      wrap.scrollLeft = startLeft - dx;
-    });
-    const end = (e) => { down = false; try { wrap.releasePointerCapture(e.pointerId); } catch (err) {} };
-    wrap.addEventListener('pointerup', end);
-    wrap.addEventListener('pointercancel', end);
-    // suppress click navigation if the pointer was dragged
-    wrap.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
   }
 
   /* ---------- PAGE TRANSITION ("boarding") ---------- */
@@ -342,7 +334,7 @@
     initGallery();
     initForm();
     initPageTransition();
-    initFleetDrag();
+    initFleetMarquee();
   });
 
   window.addEventListener('load', () => { if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh(); });
