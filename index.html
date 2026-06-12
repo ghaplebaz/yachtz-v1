@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=3">
+<link rel="stylesheet" href="assets/css/style.css?v=8">
 </head>
 <body class="is-loading">
 
@@ -52,20 +52,22 @@
 
   <!-- HERO -->
   <section class="hero">
-    <canvas id="hero-canvas"></canvas>
+    <img class="hero__bg" src="assets/images/hero-regatta.jpg" alt="Aerial of a luxury yacht on deep blue open water">
     <div class="hero__scrim"></div>
-    <div class="container hero__content">
-      <p class="eyebrow eyebrow--invert hero__eyebrow"><span class="dot"></span>DubaiYachtz · Dubai Marina · Est. 1998</p>
-      <h1 class="hero__title" data-split data-lines="Luxury yachting|experience"></h1>
-      <div class="hero__row">
-        <p class="hero__sub">From the heart of Dubai Marina, step aboard the Gulf's most extraordinary yachts — a flawless crew, a voyage shaped entirely around you, and the quiet assurance of absolute discretion.</p>
+    <div class="container hero__content hero__content--centered">
+      <div class="hero__brand hero__eyebrow">
+        <span class="hero__wordmark serif">DubaiYachtz</span>
+        <span class="hero__tagline"><span class="dot"></span>Dubai Marina · Est. 1998</span>
+      </div>
+      <div class="hero__bottom">
+        <h1 class="hero__title" data-split data-lines="Luxury yachting|experience"></h1>
+        <p class="hero__sub">Step aboard the Gulf's finest yachts — a flawless crew and a voyage shaped entirely around you.</p>
         <div class="hero__actions">
-          <a href="#yachts" class="btn btn--invert magnetic">Explore the fleet</a>
-          <a href="yacht.html#inquiry" class="btn btn--ghost magnetic" style="color:#fff;border-color:rgba(255,255,255,.4)">Quick reservation</a>
+          <a href="yacht.html#inquiry" class="btn btn--invert magnetic">Quick reservation</a>
+          <a href="#yachts" class="btn btn--ghost magnetic" style="color:#fff;border-color:rgba(255,255,255,.45)">Explore the fleet</a>
         </div>
       </div>
     </div>
-    <div class="hero__scroll"><span>Scroll</span><span class="bar"></span></div>
   </section>
 
   <!-- EXPERIENCE PHOTO BAND -->
@@ -269,12 +271,10 @@
 </footer>
 
 <!-- LIBRARIES -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 <!-- APP -->
-<script src="assets/js/ocean.js?v=2"></script>
-<script src="assets/js/main.js?v=4"></script>
+<script src="assets/js/main.js?v=5"></script>
 </body>
 </html>

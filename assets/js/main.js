@@ -166,6 +166,19 @@
       return;
     }
 
+    /* hero cinematic pin-zoom (enhancement only — existing entrance animation untouched) */
+    const heroBg = document.querySelector('.hero__bg');
+    const heroEl = document.querySelector('.hero');
+    if (heroBg && heroEl) {
+      const heroZoom = gsap.timeline({
+        scrollTrigger: { trigger: heroEl, start: 'top top', end: '+=100%', scrub: true, pin: true, anticipatePin: 1, invalidateOnRefresh: true }
+      });
+      heroZoom
+        .fromTo(heroBg, { scale: 1, filter: 'brightness(1)' }, { scale: 1.15, filter: 'brightness(1.06)', ease: 'none', duration: 1 }, 0)
+        .to('.hero__scroll', { autoAlpha: 0, ease: 'none', duration: 0.25 }, 0)
+        .to('.hero__content', { autoAlpha: 0, y: -40, ease: 'none', duration: 0.4 }, 0.62);
+    }
+
     /* generic reveals */
     gsap.utils.toArray('.reveal').forEach((el) => {
       ScrollTrigger.create({ trigger: el, start: 'top 85%',
