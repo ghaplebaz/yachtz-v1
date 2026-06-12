@@ -169,7 +169,8 @@
     /* hero cinematic pin-zoom (enhancement only — existing entrance animation untouched) */
     const heroBg = document.querySelector('.hero__bg');
     const heroEl = document.querySelector('.hero');
-    if (heroBg && heroEl && window.innerWidth > 768) {
+    const heroZoomOK = window.matchMedia('(pointer: fine)').matches || window.innerWidth > 768;
+    if (heroBg && heroEl && heroZoomOK) {
       const heroZoom = gsap.timeline({
         scrollTrigger: { trigger: heroEl, start: 'top top', end: '+=100%', scrub: true, pin: true, anticipatePin: 1, invalidateOnRefresh: true }
       });
