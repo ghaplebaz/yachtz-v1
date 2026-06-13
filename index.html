@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=30">
+<link rel="stylesheet" href="assets/css/style.css?v=32">
 </head>
 <body class="is-loading">
 
@@ -69,10 +69,15 @@
         <h2 class="serif">Experience Dubai from the water</h2>
         <p>From sunrise cruises along the coastline to private sunset dinners under the skyline — every voyage is composed around you.</p>
       </div>
-      <div class="photoband" data-stagger>
-        <figure class="reveal"><img src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=800&q=80" alt="Sunrise charter"><figcaption>Sunrise charters</figcaption></figure>
-        <figure class="reveal"><img src="https://images.unsplash.com/photo-1593351415075-3bac9f45c877?auto=format&fit=crop&w=800&q=80" alt="Sunset dinner cruise"><figcaption>Sunset dinners</figcaption></figure>
-        <figure class="reveal"><img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?auto=format&fit=crop&w=800&q=80" alt="Island escape"><figcaption>Island escapes</figcaption></figure>
+      <div class="photoband">
+        <div class="photoband__track">
+          <figure class="pb-video"><video src="assets/video/island-cove.mp4" poster="assets/video/island-cove-poster.jpg" muted loop playsinline preload="metadata"></video></figure>
+          <figure><img src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=800&q=80" alt="Sunrise charter"><figcaption>Sunrise charters</figcaption></figure>
+          <figure class="pb-video"><video src="assets/video/golden-coast.mp4" poster="assets/video/golden-coast-poster.jpg" muted loop playsinline preload="metadata"></video></figure>
+          <figure><img src="https://images.unsplash.com/photo-1593351415075-3bac9f45c877?auto=format&fit=crop&w=800&q=80" alt="Sunset dinner cruise"><figcaption>Sunset dinners</figcaption></figure>
+          <figure class="pb-video"><video src="assets/video/ocean-waves.mp4" poster="assets/video/ocean-waves-poster.jpg" muted loop playsinline preload="metadata"></video></figure>
+          <figure><img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?auto=format&fit=crop&w=800&q=80" alt="Island escape"><figcaption>Island escapes</figcaption></figure>
+        </div>
       </div>
     </div>
   </section>
@@ -288,6 +293,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 <!-- APP -->
-<script src="assets/js/main.js?v=10"></script>
+<script src="assets/js/main.js?v=12"></script>
 </body>
 </html>

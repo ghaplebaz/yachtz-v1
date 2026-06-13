@@ -277,15 +277,23 @@
 
   /* ---------- FLEET MARQUEE (continuous loop) ---------- */
   function initFleetMarquee() {
-    const track = document.querySelector('.fleet__track');
-    if (!track || reduce) return; // reduced-motion = static scrollable row
-    // duplicate the cards so translateX(-50%) loops seamlessly
-    const cards = Array.prototype.slice.call(track.children);
-    cards.forEach((c) => {
-      const clone = c.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      clone.removeAttribute('data-cursor');
-      track.appendChild(clone);
+    if (reduce) return; // reduced-motion = static scrollable rows, no clones
+    // duplicate each marquee track's items so translateX(-50%) loops seamlessly
+    ['.fleet__track', '.photoband__track'].forEach((sel) => {
+      const track = document.querySelector(sel);
+      if (!track) return;
+      Array.prototype.slice.call(track.children).forEach((c) => {
+        const clone = c.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        clone.removeAttribute('data-cursor');
+        track.appendChild(clone);
+      });
+    });
+    // autoplay the looping video cards (originals + clones); muted = allowed to play
+    document.querySelectorAll('.photoband video').forEach((v) => {
+      v.muted = true;
+      const p = v.play();
+      if (p && p.catch) p.catch(function () {});
     });
   }
 
