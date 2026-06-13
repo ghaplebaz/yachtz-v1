@@ -290,7 +290,7 @@
       });
     });
     // autoplay the looping video cards (originals + clones); muted = allowed to play
-    document.querySelectorAll('.photoband video').forEach((v) => {
+    document.querySelectorAll('.photoband video, .cat video, .service-card video').forEach((v) => {
       v.muted = true;
       const p = v.play();
       if (p && p.catch) p.catch(function () {});
@@ -324,6 +324,63 @@
   }, true);
 
   /* ---------- INIT ---------- */
+  /* ---------- REVIEWS: overlapping fan gallery ---------- */
+  function initOverlapGallery() {
+    const g = document.getElementById('reviewGallery');
+    if (!g || reduce) return; // reduced-motion = static grid (CSS)
+    const cards = Array.prototype.slice.call(g.querySelectorAll('.og-card'));
+    const n = cards.length;
+    if (!n) return;
+    const half = Math.floor(n / 2);
+    let active = half;
+    let timer = null;
+
+    function layout() {
+      const w = g.clientWidth;
+      const fx = w < 600 ? 0.14 : 0.17; // horizontal offset factor (% of width)
+      cards.forEach((card, i) => {
+        let p = i - active;
+        if (p > half) p -= n;
+        if (p < -half) p += n;
+        const ap = Math.abs(p);
+        const x = p * fx * w;
+        const y = p === 0 ? -30 : 24 + (ap - 1) * 18;
+        const s = p === 0 ? 1.18 : ap === 1 ? 0.95 : 0.84;
+        card.style.setProperty('--x', x.toFixed(1) + 'px');
+        card.style.setProperty('--y', y + 'px');
+        card.style.setProperty('--s', s);
+        card.style.setProperty('--z', 30 - ap * 10);
+        card.style.setProperty('--o', ap >= 3 ? 0 : 1);
+        card.classList.toggle('is-focus', p === 0);
+        card.setAttribute('aria-hidden', p === 0 ? 'false' : 'true');
+      });
+    }
+    function go(i) { active = ((i % n) + n) % n; layout(); }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function start() { stop(); timer = setInterval(() => go(active + 1), 2400); }
+
+    cards.forEach((card, i) => {
+      card.addEventListener('click', () => go(i));
+      card.addEventListener('mouseenter', () => go(i));
+    });
+    g.addEventListener('mouseenter', stop);
+    g.addEventListener('mouseleave', start);
+
+    // basic swipe / drag
+    let sx = null;
+    g.addEventListener('pointerdown', (e) => { sx = e.clientX; stop(); });
+    window.addEventListener('pointerup', (e) => {
+      if (sx == null) return;
+      const dx = e.clientX - sx; sx = null;
+      if (Math.abs(dx) > 40) go(active + (dx < 0 ? 1 : -1));
+      start();
+    });
+    window.addEventListener('resize', layout);
+
+    layout();
+    start();
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     // pre-split hero title and set hidden states BEFORE preloader exits (prevents flash)
     document.querySelectorAll('.hero__title[data-split]').forEach(splitLines);
@@ -343,6 +400,7 @@
     initForm();
     initPageTransition();
     initFleetMarquee();
+    initOverlapGallery();
   });
 
   window.addEventListener('load', () => { if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh(); });

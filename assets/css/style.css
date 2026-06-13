@@ -184,6 +184,9 @@ section{position:relative}
 .btn--invert:hover{background:#fff}
 .btn--brass{background:var(--brass);color:var(--ocean-900)}
 .btn--brass:hover{background:var(--brass-light)}
+/* navy CTA — matches the nav Quick reservation hover colour */
+.btn--navy{background:#2E4052;color:#fff;border:1px solid #2E4052}
+.btn--navy:hover{background:#25333F;border-color:#25333F;box-shadow:inset 0 0 0 1px var(--brass)}
 .btn__arrow{transition:transform var(--dur-base) var(--ease-luxury)}
 .btn:hover .btn__arrow{transform:translateX(4px)}
 .btn.magnetic{will-change:transform}
@@ -265,7 +268,7 @@ section{position:relative}
 .yacht-card__price{font-family:var(--font-mono);font-size:var(--fs-small);color:var(--text-strong)}
 .yacht-card__link{font-size:var(--fs-small);color:var(--ocean-500);display:inline-flex;gap:6px;align-items:center}
 /* FLEET cards only: full-image with text overlaid at the bottom + blur gradient */
-.fleet .yacht-card{position:relative;display:flex;align-items:flex-end;aspect-ratio:3/4;color:#fff;background:none;margin-right:var(--space-6)}
+.fleet .yacht-card{flex:0 0 clamp(320px,33vw,460px);position:relative;display:flex;align-items:flex-end;aspect-ratio:3/4;color:#fff;background:none;margin-right:var(--space-8)}
 .fleet .yacht-card__media{position:absolute;inset:0;aspect-ratio:auto}
 .fleet .yacht-card__body{position:relative;z-index:2;width:100%;padding:var(--space-6) var(--space-5) var(--space-5);isolation:isolate}
 .fleet .yacht-card__body::before{content:"";position:absolute;inset:-64px 0 0 0;z-index:-1;
@@ -306,9 +309,9 @@ section{position:relative}
 @media(min-width:640px){.cats__grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1024px){.cats__grid{grid-template-columns:repeat(4,1fr)}}
 .cat{position:relative;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:3/4;color:#fff;display:flex;align-items:flex-end;padding:var(--space-5)}
-.cat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform var(--dur-cinematic) var(--ease-luxury)}
+.cat img,.cat video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform var(--dur-cinematic) var(--ease-luxury)}
 .cat::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(14,27,44,0) 30%,rgba(14,27,44,.7) 100%)}
-.cat:hover img{transform:scale(1.07)}
+.cat:hover img,.cat:hover video{transform:scale(1.07)}
 .cat__name{position:relative;z-index:2;font-family:var(--font-display);font-size:var(--fs-h4);font-weight:400}
 .cat__count{position:relative;z-index:2;display:block;font-size:var(--fs-caption);color:var(--text-invert-muted);text-transform:uppercase;letter-spacing:.12em;margin-top:4px}
 
@@ -514,10 +517,10 @@ section{position:relative}
 .services{display:grid;gap:var(--space-6);grid-template-columns:1fr}
 @media(min-width:768px){.services{grid-template-columns:repeat(3,1fr)}}
 /* image card with text overlaid at the bottom (matches the category tiles) */
-.service-card{position:relative;display:flex;align-items:flex-end;aspect-ratio:3/4;color:#fff;
+.service-card{position:relative;display:flex;align-items:flex-end;aspect-ratio:5/7;color:#fff;
   border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--elev-1)}
 .service-card .media{position:absolute;inset:0;overflow:hidden;background:linear-gradient(160deg,var(--ocean-700),var(--sky-300))}
-.service-card img{width:100%;height:100%;object-fit:cover}
+.service-card img,.service-card video{width:100%;height:100%;object-fit:cover}
 .service-card .body{position:relative;z-index:2;width:100%;padding:var(--space-6) var(--space-5) var(--space-5);isolation:isolate}
 /* blurred gradient panel behind the text for readability */
 .service-card .body::before{content:"";position:absolute;inset:-56px 0 0 0;z-index:-1;
@@ -537,6 +540,25 @@ section{position:relative}
 .review .who{display:flex;align-items:center;gap:12px;margin-top:var(--space-5)}
 .review .who .av{width:42px;height:42px;border-radius:50%;background:var(--sky-200);display:grid;place-items:center;font-family:var(--font-display);color:var(--ocean-800)}
 .review .who b{font-weight:500;display:block}.review .who small{color:var(--text-subtle)}
+/* overlapping fan gallery (testimonials) — center focused, sides fanned + raised arc */
+#reviews{overflow:hidden}
+.og-gallery{position:relative;max-width:1100px;margin:var(--space-7) auto 0;
+  height:clamp(400px,48vw,480px);touch-action:pan-y}
+.og-card{position:absolute;left:50%;top:50%;width:clamp(232px,28vw,300px);aspect-ratio:3/4;
+  transform:translate(-50%,-50%) translate(var(--x,0),var(--y,0)) scale(var(--s,1));
+  z-index:var(--z,1);opacity:var(--o,1);cursor:pointer;will-change:transform;
+  transition:transform .6s cubic-bezier(.34,1.26,.4,1),opacity .5s ease}
+.og-card .review{margin:0;height:100%;display:flex;flex-direction:column;
+  box-shadow:0 18px 50px rgba(14,27,44,.20);transition:box-shadow .5s ease}
+.og-card .review p{flex:1;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+.og-card .review:hover{transform:none}
+.og-card.is-focus .review{box-shadow:0 30px 72px rgba(14,27,44,.34)}
+@media(prefers-reduced-motion:reduce){
+  .og-gallery{height:auto;display:grid;gap:var(--space-5);grid-template-columns:1fr}
+  @media(min-width:768px){.og-gallery{grid-template-columns:repeat(3,1fr)}}
+  .og-card{position:static;width:auto;aspect-ratio:auto;transform:none!important;opacity:1!important;cursor:auto}
+  .og-card .review p{-webkit-line-clamp:unset;display:block}
+}
 
 /* ---------- NEWSLETTER ---------- */
 .newsletter{background:var(--grad-navy);color:#fff;text-align:center}
